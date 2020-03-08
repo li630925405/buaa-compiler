@@ -62,6 +62,7 @@ void insert_table(string type, string name, map<string, Var>& table);
 void insert_const(string type, string name_content, bool fun);
 void insert_var(string type, string name_content, bool fun);
 
+bool contain_var(string name_content);
 Var getvar(string name_content);
 Array get_array(string name_content);
 string get_array_value(string name_content);

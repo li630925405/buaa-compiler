@@ -35,6 +35,13 @@ void insert_fun(string name, Func fun) {
 	}
 }
 
+bool contain_var(string name_content) {
+	return fun_var_table.find(name_content) != fun_var_table.end()
+		|| fun_const_table.find(name_content) != fun_const_table.end()
+		|| global_const_table.find(name_content) != global_const_table.end()
+		|| global_var_table.find(name_content) != global_var_table.end();
+}
+
 Var getvar(string name_content) {
 	Var var;
 	if (fun_var_table.find(name_content) != fun_var_table.end()) {

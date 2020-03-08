@@ -43,6 +43,15 @@ bool isVoid(string s) {
 	return s == "void";
 }
 
+void add_tmp_reg() {
+	string reg = tmp_token[tmp_t];
+	tmp_t = (tmp_t + 1) % 7;
+	while (contain_var(reg)) {
+		reg = tmp_token[tmp_t];
+		tmp_t = (tmp_t + 1) % 7;
+	}
+}
+
 string int2str(int a) {
 	char* buf = (char*)malloc(10);
 	memset(buf, 0, 10);
@@ -66,6 +75,17 @@ void term();
 void factors();
 void factor();
 
+bool is_tmp(string iden) {
+	for (int i = 0; i < 7; i++) {
+		if (iden == tmp_token[i]) {
+			if (!contain_var(iden)) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 void emit(string type) {
 	//int a = 0, b = 0;
 	/*bool a_char = false, b_char = false;
@@ -79,6 +99,9 @@ void emit(string type) {
 	//st.pop();
 	string b_iden = st_iden.top();
 	st_iden.pop();
+	if (is_tmp(b_iden)) {
+		tmp_t--;
+	}
 	/*if (isChar(st.top())) {
 		a = st.top()[1];
 	}
@@ -88,6 +111,9 @@ void emit(string type) {
 	st.pop();*/
 	string a_iden = st_iden.top();
 	st_iden.pop();
+	if (is_tmp(a_iden)) {
+		tmp_t--;
+	}
 	if (type == "ADD") {
 		//st.push(int2str(a + b));
 		st_iden.push(tmp_token[tmp_t]);

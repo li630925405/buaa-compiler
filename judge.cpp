@@ -1,7 +1,7 @@
 #include "judge.h"
 
 bool isOpe(char c) {
-	return c == '+' || c == '-';
+	return c == '+' || c == '-' || c == '*' || c == '/';
 }
 
 int isTypeIden(const char* str) {

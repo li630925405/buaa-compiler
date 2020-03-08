@@ -1,0 +1,12 @@
+const int a = 1
+int fun()
+t1=a+1
+a = t1
+ret 1
+main
+var int b
+t2=a*a
+call fun
+t3=a*RET
+t2=t2+t3
+b = t2

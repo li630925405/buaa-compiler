@@ -1,0 +1,11 @@
+const int a = 1;
+
+int fun(){
+a = a + 1;
+return(1);
+}
+
+void main(){ 
+int b;
+b = a * a + a * fun();
+}

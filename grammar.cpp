@@ -253,25 +253,20 @@ void com_statement(bool fun) {
 	}
 	else { backtrack(1); }
 	string type = getsym();
-	bool flag = true;
 	if (isTypeIden(type.c_str())) {
 		while (strcmp(getsym(), "IDENFR") != 0) {
 			error(ILLEGAL);
 			new_line();
 			type = getsym();
 			if (!isTypeIden(type.c_str())) {
-				flag = false;
 				backtrack(1);
 				break;
 			}
 			//getsym();  //IDENFR
 		}
+		string name_content = name;
 		backtrack(1);
-		if (flag) {
-			insert_var(type, name, fun);
-			print_var(type, name);
-			var_state(type, fun);
-		}
+		var_state(type, fun);
 	}
 	else {
 		backtrack(1);
@@ -387,7 +382,6 @@ void factors() {
 		factor();
 		mult();
 		factors();
-
 	}
 	else if (reread() == '/') {
 		getsym();
@@ -426,7 +420,6 @@ void factor() {
 		}
 		else if (strcmp(sym, "LPARENT") == 0) {
 			call_fun(name_content);
-			st_iden.push("RET");
 		}
 		else {
 			backtrack(1);
